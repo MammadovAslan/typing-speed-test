@@ -3,7 +3,7 @@ import { words } from "../data/words";
 import uuid from "react-uuid";
 
 const TypingTest = () => {
-  const WORDS_LIMIT = 30;
+  const WORDS_LIMIT = 60;
 
   const [randomWords, setRandomWords] = useState<string[]>([]);
   const [value, setValue] = useState("");
@@ -15,11 +15,6 @@ const TypingTest = () => {
   const [errors, setErrors] = useState<number>(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const textFieldRef = useRef<HTMLDivElement>(null);
-  const typedTextRef = useRef<HTMLParagraphElement>(null);
-  const [scroll, setScroll] = useState<number>(10);
-
-  const textContainer = textFieldRef?.current ?? undefined;
 
   const getRandomWords = () => {
     for (let i = 0; i < WORDS_LIMIT; i++) {
@@ -58,11 +53,7 @@ const TypingTest = () => {
     const lastTypedLetter = event.target.value.split("").at(-1);
 
     if (lastLetterInArray === lastTypedLetter) {
-      textContainer?.scrollTo(scroll, 0);
-      console.log(textContainer!.scrollLeft);
       setValue(event.target.value);
-      setScroll((prev) => prev + 10);
-
       if (event.target.value.length === randomWords.join("").length) {
         setFinish(true);
       }
@@ -71,7 +62,8 @@ const TypingTest = () => {
       }
     } else if (typing) {
       setTyping(false);
-    } else {
+    }
+    if (lastLetterInArray !== lastTypedLetter) {
       setErrors((prev) => prev + 1);
     }
   };
@@ -90,17 +82,6 @@ const TypingTest = () => {
 
   return (
     <div className="container">
-      <div className="text-field" ref={textFieldRef}>
-        <p className="words">{randomWords.map((el: string) => el + " ")}</p>
-        <p className="typed-text" ref={typedTextRef}>
-          {value.split("").map((el) => (
-            <span key={uuid()} className={`letter`}>
-              {el}
-            </span>
-          ))}
-        </p>
-        <input ref={inputRef} className="typing-area" value={value} onChange={handleChange} />
-      </div>
       <div className="timer-container">
         {finish ? (
           <p className="timer">
@@ -108,9 +89,22 @@ const TypingTest = () => {
             Accuracy :{calculateAccuracy()} %
           </p>
         ) : (
-          <p className="timer">Time: {seconds}</p>
+          <p className="timer">
+            Time: {seconds} <br /> Errors: {errors}
+          </p>
         )}
       </div>
+      <div className="text-field">
+        <p className="words">{randomWords.map((el: string) => el + " ")}</p>
+        <p className="typed-text">
+          {value.split("").map((el) => (
+            <span key={uuid()} className={`letter`}>
+              {el}
+            </span>
+          ))}
+        </p>
+      </div>
+        <input ref={inputRef} className="typing-area" value={value} onChange={handleChange} />
     </div>
   );
 };

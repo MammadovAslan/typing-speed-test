@@ -1,5 +1,5 @@
 import React from "react";
-import TextField from "./Components/TextField";
+import TextField from "./Components/TypingTest";
 
 const App = () => {
   return (

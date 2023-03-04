@@ -21,6 +21,7 @@
     padding: 12px;
     background-color: rgba(78, 75, 75, 0.337);
     border-radius: 12px;
+    @include easeTransition(0.3s);
     .words {
       word-break: break-all;
     }

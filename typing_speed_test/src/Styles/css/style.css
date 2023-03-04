@@ -30,6 +30,7 @@
   padding: 12px;
   background-color: rgba(78, 75, 75, 0.337);
   border-radius: 12px;
+  transition: 0.3s ease;
 }
 @media (max-width: 568px) {
   .container .text-field {

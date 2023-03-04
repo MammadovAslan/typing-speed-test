@@ -24,12 +24,18 @@
   color: #e5e5e5;
 }
 .container .text-field {
-  min-width: 90%;
+  max-width: 70%;
+  min-height: 200px;
   margin: 0 20px;
   position: relative;
   padding: 12px;
   background-color: rgba(78, 75, 75, 0.337);
   border-radius: 12px;
+}
+@media (max-width: 568px) {
+  .container .text-field {
+    max-width: 90%;
+  }
 }
 .container .text-field .words {
   word-break: break-all;
@@ -47,13 +53,28 @@
   color: #808080;
 }
 .container .typing-area {
-  opacity: 0;
   outline: none;
   border: none;
   border-radius: 4px;
   padding: 4px 4px 4px 8px;
+  width: 0;
+  height: 0;
+  opacity: 0;
   background-color: rgba(78, 75, 75, 0.337);
+}
+.container .typing-area:focus ~ .text-field {
+  box-shadow: rgb(184, 120, 2) 0px 2px 1px, rgb(184, 120, 2) 0px 4px 2px, rgb(184, 120, 2) 0px 2px 8px, rgb(184, 120, 2) 0px -2px 8px, rgb(184, 120, 2) 0px 2px 8px;
 }
 .container .error {
   background-color: red !important;
+}
+
+.refresh-button {
+  background-color: transparent;
+  border: none;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.refresh-button:active svg {
+  fill: #fff;
 }

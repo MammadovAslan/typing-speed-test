@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { words } from "../data/words";
 import uuid from "react-uuid";
+import RefreshButton from "./RefreshButton";
 
 const TypingTest = () => {
   const WORDS_LIMIT = 60;
@@ -8,6 +9,7 @@ const TypingTest = () => {
   const [randomWords, setRandomWords] = useState<string[]>([]);
   const [value, setValue] = useState("");
   const [seconds, setSeconds] = useState<number>(0);
+  const [typedText, setTypedText] = useState("");
 
   const [finish, setFinish] = useState<boolean>(false);
   const [typing, setTyping] = useState<boolean>(false);
@@ -82,6 +84,17 @@ const TypingTest = () => {
 
   return (
     <div className="container">
+      <input ref={inputRef} className="typing-area" value={value} onChange={handleChange} />
+      <RefreshButton
+        getRandomWords={getRandomWords}
+        setErrors={setErrors}
+        setSeconds={setSeconds}
+        setTyping={setTyping}
+        setValue={setValue}
+        setRandomWords={setRandomWords}
+        setFinish={setFinish}
+        inputRef={inputRef}
+      />
       <div className="timer-container">
         {finish ? (
           <p className="timer">
@@ -94,7 +107,12 @@ const TypingTest = () => {
           </p>
         )}
       </div>
-      <div className="text-field">
+      <div
+        className="text-field"
+        onClick={() => {
+          inputRef?.current?.focus();
+        }}
+      >
         <p className="words">{randomWords.map((el: string) => el + " ")}</p>
         <p className="typed-text">
           {value.split("").map((el) => (
@@ -104,7 +122,6 @@ const TypingTest = () => {
           ))}
         </p>
       </div>
-        <input ref={inputRef} className="typing-area" value={value} onChange={handleChange} />
     </div>
   );
 };

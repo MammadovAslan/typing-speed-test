@@ -1,0 +1,12 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.refresh-button {
+  background-color: transparent;
+  border: none;
+  @include easeTransition(0.2s);
+  cursor: pointer;
+  &:active svg {
+    fill: #fff;
+  }
+}

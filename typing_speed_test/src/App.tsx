@@ -1,10 +1,8 @@
-import React from "react";
-import TextField from "./Components/TypingTest";
-
+import TypingTest from "./Components/TypingTest";
 const App = () => {
   return (
     <div className="wrapper">
-      <TextField />
+      <TypingTest />
     </div>
   );
 };

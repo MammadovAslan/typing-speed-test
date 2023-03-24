@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { words } from "../data/words";
+import { words } from "../data/Words";
 import uuid from "react-uuid";
 import RefreshButton from "./RefreshButton";
 
@@ -66,6 +66,7 @@ const TypingTest = () => {
       setTyping(false);
     }
     if (lastLetterInArray !== lastTypedLetter) {
+      setValue(event.target.value);
       setErrors((prev) => prev + 1);
     }
   };
@@ -80,6 +81,31 @@ const TypingTest = () => {
     const correctLetters = value.length - errors;
     const accuracy = Math.round((correctLetters * 100) / value.length);
     return accuracy;
+  };
+
+  const renderWords = () => {
+    let inputIndex = 0;
+    return randomWords
+      .join("")
+      .split("")
+      .map((letter, letterIndex) => {
+        let style: any = { color: "#808080" };
+        if (value[inputIndex]) {
+          if (letter === value[inputIndex]) {
+            style.backgroundColor = "rgb(15, 85, 15)";
+            style.color = "#e5e5e5";
+          } else {
+            style.backgroundColor = "rgb(119, 23, 23)";
+            style.color = "#e5e5e5";
+          }
+          inputIndex++;
+        }
+        return (
+          <span key={letterIndex} style={style}>
+            {letter}
+          </span>
+        );
+      });
   };
 
   return (
@@ -113,14 +139,7 @@ const TypingTest = () => {
           inputRef?.current?.focus();
         }}
       >
-        <p className="words">{randomWords.map((el: string) => el + " ")}</p>
-        <p className="typed-text">
-          {value.split("").map((el) => (
-            <span key={uuid()} className={`letter`}>
-              {el}
-            </span>
-          ))}
-        </p>
+        <p className="words">{renderWords()}</p>
       </div>
     </div>
   );

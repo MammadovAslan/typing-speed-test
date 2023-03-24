@@ -9,14 +9,14 @@
 
 .wrapper {
   min-height: 100dvh;
-  background-color: #141414;
+  background-color: #252121;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 18px;
+  font-size: 22px;
   padding-top: 20px;
   gap: 40px;
 }
@@ -38,35 +38,19 @@
   }
 }
 .container .text-field .words {
-  word-break: break-all;
-}
-.container .text-field .typed-text {
-  position: absolute;
-  word-break: break-all;
-  top: 12px;
-  left: 12px;
-  right: 12px;
-  min-height: 18px;
-  font-weight: 500;
-}
-.container .text-field .words {
   color: #808080;
+  font-size: 28px;
 }
 .container .typing-area {
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  padding: 4px 4px 4px 8px;
   width: 0;
   height: 0;
   opacity: 0;
-  background-color: rgba(78, 75, 75, 0.337);
 }
 .container .typing-area:focus ~ .text-field {
   box-shadow: rgb(184, 120, 2) 0px 2px 1px, rgb(184, 120, 2) 0px 4px 2px, rgb(184, 120, 2) 0px 2px 8px, rgb(184, 120, 2) 0px -2px 8px, rgb(184, 120, 2) 0px 2px 8px;
 }
 .container .error {
-  background-color: red !important;
+  color: rgb(119, 23, 23);
 }
 
 .refresh-button {

@@ -128,9 +128,7 @@ const TypingTest = () => {
             Accuracy :{calculateAccuracy()} %
           </p>
         ) : (
-          <p className="timer">
-            Time: {seconds} <br /> Errors: {errors}
-          </p>
+          <p className="timer">Time: {seconds}</p>
         )}
       </div>
       <div
